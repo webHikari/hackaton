@@ -1,0 +1,6 @@
+.Upload {
+  border: 1px solid var(--deep-blue);
+  padding: 20px;
+  cursor: pointer;
+  background: #FFFFFF;
+}
