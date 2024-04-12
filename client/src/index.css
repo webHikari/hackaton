@@ -5,7 +5,6 @@
 
 
   color-scheme: light;
-  color: rgba(255, 255, 255, 0.87);
   background-color: rgb(246, 245, 240);
 
   font-synthesis: none;
@@ -17,6 +16,7 @@
   --blue: #A9C1FC;
 
   --lite-blue: #C0D1FC;
+  color: var(--gray);
 }
 
 @font-face {

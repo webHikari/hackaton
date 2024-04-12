@@ -1,7 +1,12 @@
+import styles from './Dashboard.module.css';
 
+import Upload from '../Upload/Upload.jsx'
 
 export default function Dashboard() {
   return (
-    <p>Dashboard page</p>
+    <>
+      <Upload/>
+      <p>Dashboard page</p>
+    </> 
   );
 }

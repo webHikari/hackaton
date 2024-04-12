@@ -1,4 +1,4 @@
-.LoginForm {
+.RegisterForm {
   display: flex;
   flex-direction: column;
   gap: 10px;
@@ -8,16 +8,16 @@
   background: #FFFFFF;
 }
 
-.LoginForm h1 {
+.RegisterForm h1 {
   line-height: 1rem;
   padding-bottom: 20px;
 }
 
-.LoginForm button {
+.RegisterForm button {
   margin-top: 40px;
 }
 
-.LoginForm p {
+.RegisterForm p {
   width: max-content;
   margin: 0;
 }
