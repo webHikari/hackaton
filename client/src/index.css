@@ -1,0 +1,106 @@
+:root {
+
+  line-height: 1.5;
+  font-weight: 400;
+
+
+  color-scheme: light;
+  color: rgba(255, 255, 255, 0.87);
+  background-color: rgb(246, 245, 240);
+
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  --deep-blue: #084CFF;
+  --gray: #4B5361;
+  --blue: #A9C1FC;
+
+  --lite-blue: #C0D1FC;
+}
+
+@font-face {
+  font-family: "Agrandir-GrandLight";
+  src: url('./assets/Agrandir-GrandLight.otf');
+
+  font-display: swap; 
+}
+
+@font-face {
+  font-family: DefaultFont;
+  src: url('./assets/DefaultFont.woff2') format("woff2");
+  font-style: normal;
+}
+
+a {
+  font-weight: 400;
+  font-size: 16px;
+  color: var(--deep-blue); 
+  text-decoration: inherit;
+}
+a:hover {
+  text-decoration: underline; 
+}
+
+body {
+  margin: 0;
+  display: flex;
+  place-items: center;
+  min-width: 320px;
+  min-height: 100vh;
+  font-family: DefaultFont;  
+}
+
+h1, h2, h3, h4, h5, h6 {
+  width: max-content;
+  color: var(--deep-blue);
+  font-family: Agrandir-GrandLight;
+}
+
+p {
+  font-family: DefaultFont;
+  color: var(--gray);
+}
+
+button {
+  border: 1px solid var(--deep-blue);
+  font-size: 1em;
+  padding: .5rem;
+  background-color: var(--lite-blue);
+  color: var(--deep-blue);
+  font-family: DefaultFont;
+  cursor: pointer;
+  transition: background-color 0.15s ease-in-out;
+}
+
+button:hover {
+  background-color: var(--blue);
+}
+
+button:focus,
+button:focus-visible {
+  outline: 4px auto -webkit-focus-ring-color;
+}
+
+.btn2 {
+  background-color: transparent;
+}
+
+.btn2:hover {
+  
+}
+
+input {
+  padding: .5rem;
+  outline: none;
+  font-family: DefaultFont;
+  font-size: 15px;
+  border-radius: none;
+  border: 1px solid var(--gray);
+}
+
+.preview {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}

@@ -1,0 +1,18 @@
+.LoginForm {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  width: 320px;
+  padding: 20px;
+  border: 1px solid var(--deep-blue);
+  background: #FFFFFF;
+}
+
+.LoginForm h1 {
+  line-height: 1rem;
+  padding-bottom: 20px;
+}
+
+.LoginForm button {
+  margin-top: 40px;
+}
