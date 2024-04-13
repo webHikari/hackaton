@@ -35,7 +35,7 @@ export default function Register({setAuth}) {
     } catch (err) {
         console.error(err.message);
     }
-};
+  };
 
   return (
     <form className={styles.RegisterForm} onSubmit={onSubmitForm}>
