@@ -104,3 +104,7 @@ input {
   flex-direction: column;
   gap: 10px;
 }
+
+.csv-input {
+  display: none !important;
+}

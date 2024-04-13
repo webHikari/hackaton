@@ -1,59 +1,46 @@
 import { useState, useRef, useEffect } from 'react';
+import CSVReader from 'react-csv-reader';
 
 import styles from './Upload.module.css';
 
+import URL from '../../config/URL.jsx'
+
 export default function Upload() {
   // State variables
-  const [file, setFile] = useState(null); // 1. File state to hold the selected file
-  const [uploading, setUploading] = useState(false); // 2. State to track if uploading is in progress
-  const [uploadProgress, setUploadProgress] = useState(0); // 3. State to track upload progress
-  const [uploadStatus, setUploadStatus] = useState(''); // 4. State to hold upload status message
+  const [uploading, setUploading] = useState(false); // State to track if uploading is in progress
+  const [uploadProgress, setUploadProgress] = useState(0); // State to track upload progress
+  const [uploadStatus, setUploadStatus] = useState(''); // State to hold upload status message
 
   // Ref for file input element
   const fileInputRef = useRef(null);
 
-  // Effect to trigger upload when file state changes
-  useEffect(() => {
-    if (file) {
-      handleUpload();
-    }
-  }, [file]);
-
-  // Function to handle file drop
-  const handleDrop = (e) => {
-    e.preventDefault();
-    const droppedFiles = Array.from(e.dataTransfer.files);
-    setFile(droppedFiles[0]);
-  };
-
   // Function to handle file selection from input
-  const handleFileChange = (e) => {
-    const selectedFile = e.target.files[0];
-    setFile(selectedFile);
+  const handleFileChange = (data, fileInfo) => {
+    // File data is available in 'data' variable
+    console.log('Parsed CSV data:', data);
+    console.log('File info:', fileInfo);
+    handleUpload(data);
   };
 
   // Function to handle file upload
-  const handleUpload = async () => {
-    if (!file) {
-      setUploadStatus('No file selected');
-      return;
-    }
-
+  const handleUpload = async (fileData) => {
     setUploading(true); // Set uploading to true
 
     try {
-      const formData = new FormData();
-      formData.append('file', file);
-
-      const response = await fetch('/upload', {
+      // Perform file upload operation here, using 'fileData'
+      // Replace '/upload' with the actual upload endpoint
+      const response = await fetch('https://e21b-109-252-191-215.ngrok-free.app/predict', {
         method: 'POST',
-        body: formData,
+        body: JSON.stringify(fileData), // Send parsed CSV data as JSON
+        headers: {
+          'Content-Type': 'application/json'
+        },
         onUploadProgress: (progressEvent) => {
           const progress = Math.round((progressEvent.loaded / progressEvent.total) * 100);
           setUploadProgress(progress);
         },
       });
-
+      console.log(response);
       if (response.ok) {
         setUploadStatus('Upload success');
       } else {
@@ -75,20 +62,28 @@ export default function Upload() {
   // Render component
   return (
     <div
-      onDrop={handleDrop}
-      onDragOver={(e) => e.preventDefault()}
       onClick={openFileDialog}
+      onDrop={(e) => {
+        e.preventDefault();
+        handleFileChange(e.dataTransfer.files[0]);
+      }}
+      onDragOver={(e) => e.preventDefault()}
       className={styles.Upload}
     >
-      <p>Drag & Drop or Click to Select File</p>
-      <input
-        type="file"
-        ref={fileInputRef}
-        onChange={handleFileChange}
-        style={{ display: 'none' }}
-      />
+      <p>Click or Drag & Drop to Select File</p>
       {uploading && <p>Uploading... {uploadProgress}%</p>}
       {uploadStatus && <p>{uploadStatus}</p>}
+      <CSVReader 
+
+        onFileLoaded={handleFileChange}
+        ref={fileInputRef}
+        parserOptions={{
+          header: true,
+          dynamicTyping: true,
+          skipEmptyLines: true,
+          transformHeader: header => header.toLowerCase().replace(/\W/g, "_")
+        }}
+      />
     </div>
   );
 }
