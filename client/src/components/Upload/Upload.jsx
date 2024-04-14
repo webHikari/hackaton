@@ -29,9 +29,11 @@ export default function Upload() {
     try {
       // Perform file upload operation here, using 'fileData'
       // Replace '/upload' with the actual upload endpoint
-      const response = await fetch('https://e21b-109-252-191-215.ngrok-free.app/predict/', {
+      const jsonData = { data: fileData };
+
+      const response = await fetch("http://62.113.115.130:8000/predict/", {
         method: 'POST',
-        body: JSON.stringify(fileData), // Send parsed CSV data as JSON
+        body: JSON.stringify(jsonData), // Send parsed CSV data as JSON
         headers: {
           'Content-Type': 'application/json'
         },
